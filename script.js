@@ -31,13 +31,32 @@ const changeFigure = (event) => {
     figures[index].style.backgroundColor = circles[index].changeBcolor();
 }
 
+const generateState = (numOfFigures, numOfColors) => {
+    arr = [];
+    for (let i = 0; i < numOfFigures; i++) {
+        curColor = Math.floor(Math.random() * numOfColors);
+        arr.push(curColor);
+    } 
+    return arr; 
+};
+
+const guess = () => {
+    answer.innerText =  state.join(' ');
+}
 
 const circleContainer = document.getElementById("circle-container");
+const btn = document.getElementById("guesser");
+const counter = document.getElementById("counter");
+const answer = document.getElementById("answer");
 
+const numOfCircles = 4;
 let circles = [];
-for (let i = 0; i < 4; i++) {
+for (let i = 0; i < numOfCircles; i++) {
     circles.push(new Circle(i));
 }
+
+const numOfColors = Circle.bcolors.length;
+const state = generateState();
 
 const figures = [document.getElementById("circle0"),
                  document.getElementById("circle1"),
@@ -49,3 +68,5 @@ figures[0].addEventListener("click", changeFigure);
 figures[1].addEventListener("click", changeFigure);
 figures[2].addEventListener("click", changeFigure);
 figures[3].addEventListener("click", changeFigure);
+
+btn.addEventListener("click", guess);

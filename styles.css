@@ -13,6 +13,16 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+#informer {
+    width: 22.2em /* 360px */;
+    padding: 0.9375em 0.9375em /* 15px 15px */;
+    border: none;
+    color: var(--dark-color);
+    font-weight: normal;
+    font-size: 1rem /* 16px */;
+    text-align: center;
+}
+
 #circle-container {
     display: flex;
     flex-direction: row;  
