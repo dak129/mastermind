@@ -31,37 +31,58 @@ const changeFigure = (event) => {
     figures[index].style.backgroundColor = circles[index].changeBcolor();
 }
 
-const generateState = (numOfFigures, numOfColors) => {
+const generatePuzzle = (numOfFigures, numOfColors) => {
     arr = [];
     for (let i = 0; i < numOfFigures; i++) {
-        curColor = Math.floor(Math.random() * numOfColors);
+        curColor = Circle.bcolors[Math.floor(Math.random() * numOfColors)];
         arr.push(curColor);
     } 
-    return arr; 
+    return arr;
 };
 
-const guess = () => {
-    answer.innerText =  state.join(' ');
+const notateNumber = (num) => {
+    return (num % 10 >= 2 & num % 10 <= 4 && (num < 10 || num > 20)) ? 
+    num.toString() + ' раза' : num.toString() + ' раз';
+}
+
+const checkPlaces = () => {
+    let countPlaces = 0;
+    for (let i = 0; i < numOfCircles; i++) {
+        if (circles[i].bcolor == puzzle[i]) {
+            countPlaces++;
+        };
+    } 
+    return countPlaces.toString();
+}
+
+const guessSolution = () => {
+    count++;
+    counter.value = notateNumber(count);
+    places = checkPlaces();
+    answer.innerText = "Загадано " + puzzle.join(' ')
+                    + " угадано " + places + " кругов";
 }
 
 const circleContainer = document.getElementById("circle-container");
 const btn = document.getElementById("guesser");
 const counter = document.getElementById("counter");
 const answer = document.getElementById("answer");
+const figures = [document.getElementById("circle0"),
+                 document.getElementById("circle1"),
+                 document.getElementById("circle2"),
+                 document.getElementById("circle3")];
 
 const numOfCircles = 4;
+const numOfColors = Circle.bcolors.length;
+let count = 0;
+
 let circles = [];
 for (let i = 0; i < numOfCircles; i++) {
     circles.push(new Circle(i));
 }
 
-const numOfColors = Circle.bcolors.length;
-const state = generateState();
+const puzzle = generatePuzzle(numOfCircles, numOfColors);
 
-const figures = [document.getElementById("circle0"),
-                 document.getElementById("circle1"),
-                 document.getElementById("circle2"),
-                 document.getElementById("circle3")];
 drawFigures();
 
 figures[0].addEventListener("click", changeFigure);
@@ -69,4 +90,4 @@ figures[1].addEventListener("click", changeFigure);
 figures[2].addEventListener("click", changeFigure);
 figures[3].addEventListener("click", changeFigure);
 
-btn.addEventListener("click", guess);
+btn.addEventListener("click", guessSolution);
