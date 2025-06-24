@@ -32,62 +32,44 @@ const changeFigure = (event) => {
 }
 
 const generatePuzzle = (numOfFigures, numOfColors) => {
-    arr = [];
+    let arr = [];
     for (let i = 0; i < numOfFigures; i++) {
-        curColor = Circle.bcolors[Math.floor(Math.random() * numOfColors)];
-        arr.push(curColor);
+        let curColorInd = Math.floor(Math.random() * numOfColors);
+        arr.push(curColorInd);
     } 
-    return arr;
+    return arr; 
 };
 
-const notateNumber = (num) => {
-    return (num % 10 >= 2 & num % 10 <= 4 && (num < 10 || num > 20)) ? 
-    num.toString() + ' раза' : num.toString() + ' раз';
-}
 
-const checkPlaces = () => {
-    let countPlaces = 0;
-    for (let i = 0; i < numOfCircles; i++) {
-        if (circles[i].bcolor == puzzle[i]) {
-            countPlaces++;
-        };
-    } 
-    return countPlaces.toString();
-}
 
-const guessSolution = () => {
-    count++;
-    counter.value = notateNumber(count);
-    places = checkPlaces();
-    answer.innerText = "Загадано " + puzzle.join(' ')
-                    + " угадано " + places + " кругов";
+const guess = () => {
+    countGuesses++;
+    counter.value = "Попытка " + countGuesses.toString();
+    answer.innerText =  puzzle.join(' ');
 }
 
 const circleContainer = document.getElementById("circle-container");
 const btn = document.getElementById("guesser");
 const counter = document.getElementById("counter");
 const answer = document.getElementById("answer");
+
+const numOfCircles = 4;
+const circles = [new Circle(0), new Circle(1),
+                 new Circle(2), new Circle(3)];
+
+const numOfColors = Circle.bcolors.length;
+const puzzle = generatePuzzle(numOfCircles, numOfColors);
+
 const figures = [document.getElementById("circle0"),
                  document.getElementById("circle1"),
                  document.getElementById("circle2"),
                  document.getElementById("circle3")];
-
-const numOfCircles = 4;
-const numOfColors = Circle.bcolors.length;
-let count = 0;
-
-let circles = [];
-for (let i = 0; i < numOfCircles; i++) {
-    circles.push(new Circle(i));
-}
-
-const puzzle = generatePuzzle(numOfCircles, numOfColors);
-
-drawFigures();
-
+drawFigures(numOfCircles, numOfColors);
 figures[0].addEventListener("click", changeFigure);
 figures[1].addEventListener("click", changeFigure);
 figures[2].addEventListener("click", changeFigure);
 figures[3].addEventListener("click", changeFigure);
 
-btn.addEventListener("click", guessSolution);
+let countGuesses = 0;
+
+btn.addEventListener("click", guess);
