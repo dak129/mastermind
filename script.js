@@ -31,21 +31,35 @@ const changeFigure = (event) => {
     figures[index].style.backgroundColor = circles[index].changeBcolor();
 }
 
-const generatePuzzle = (numOfFigures, numOfColors) => {
+const generatePuzzle = (/*numOfFigures, */numOfColors) => {
     let arr = [];
-    for (let i = 0; i < numOfFigures; i++) {
-        let curColorInd = Math.floor(Math.random() * numOfColors);
-        arr.push(curColorInd);
+    for (let i = 0; i < circles.length; i++) {
+        let colorIndex = Math.floor(Math.random() * numOfColors);
+        arr.push(colorIndex);
     } 
     return arr; 
 };
 
+const getCurrentColors = (/*numOfFigures */) => {
+    let arr = [];
+    for (let i = 0; i < circles.length; i++) {
+        arr.push(Circle.bcolors.indexOf(circles[i].bcolor));
+    }
+    return arr;
+}
 
+/*
+const checkMatches = (curGuess) => {
+    countExact = 0;
+    for (let i = 0; i < circles.length; i++) { };
+}  
+*/
 
 const guess = () => {
     countGuesses++;
     counter.value = "Попытка " + countGuesses.toString();
-    answer.innerText =  puzzle.join(' ');
+    const curGuess = getCurrentColors(/*numOfCircles */);
+    answer.innerText =  curGuess.join(' ') + ' vs ' + puzzle.join(' ');
 }
 
 const circleContainer = document.getElementById("circle-container");
@@ -53,18 +67,18 @@ const btn = document.getElementById("guesser");
 const counter = document.getElementById("counter");
 const answer = document.getElementById("answer");
 
-const numOfCircles = 4;
+/*const numOfCircles = 4; */
 const circles = [new Circle(0), new Circle(1),
                  new Circle(2), new Circle(3)];
 
 const numOfColors = Circle.bcolors.length;
-const puzzle = generatePuzzle(numOfCircles, numOfColors);
+const puzzle = generatePuzzle(/* numOfCircles, */numOfColors);
 
 const figures = [document.getElementById("circle0"),
                  document.getElementById("circle1"),
                  document.getElementById("circle2"),
                  document.getElementById("circle3")];
-drawFigures(numOfCircles, numOfColors);
+drawFigures();
 figures[0].addEventListener("click", changeFigure);
 figures[1].addEventListener("click", changeFigure);
 figures[2].addEventListener("click", changeFigure);
