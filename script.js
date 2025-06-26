@@ -31,7 +31,7 @@ const changeFigure = (event) => {
     figures[index].style.backgroundColor = circles[index].changeBcolor();
 }
 
-const generatePuzzle = (/*numOfFigures, */numOfColors) => {
+const generatePuzzle = (numOfColors) => {
     let arr = [];
     for (let i = 0; i < circles.length; i++) {
         let colorIndex = Math.floor(Math.random() * numOfColors);
@@ -40,7 +40,7 @@ const generatePuzzle = (/*numOfFigures, */numOfColors) => {
     return arr; 
 };
 
-const getCurrentColors = (/*numOfFigures */) => {
+const getCurrentColors = () => {
     let arr = [];
     for (let i = 0; i < circles.length; i++) {
         arr.push(Circle.bcolors.indexOf(circles[i].bcolor));
@@ -48,18 +48,24 @@ const getCurrentColors = (/*numOfFigures */) => {
     return arr;
 }
 
-/*
 const checkMatches = (curGuess) => {
     countExact = 0;
-    for (let i = 0; i < circles.length; i++) { };
+    for (let i = 0; i < circles.length; i++) { 
+        if (curGuess[i] == puzzle[i]) {
+            countExact++;
+        }
+    }
+    return countExact;
 }  
-*/
 
 const guess = () => {
     countGuesses++;
     counter.value = "Попытка " + countGuesses.toString();
-    const curGuess = getCurrentColors(/*numOfCircles */);
-    answer.innerText =  curGuess.join(' ') + ' vs ' + puzzle.join(' ');
+    const myGuess = getCurrentColors();
+    const exactMatches = checkMatches(myGuess);
+    answer.innerText =  myGuess.join(' ') + ' vs ' 
+                        + puzzle.join(' ') + ' exact ' 
+                        + exactMatches.toString();
 }
 
 const circleContainer = document.getElementById("circle-container");
@@ -67,12 +73,11 @@ const btn = document.getElementById("guesser");
 const counter = document.getElementById("counter");
 const answer = document.getElementById("answer");
 
-/*const numOfCircles = 4; */
 const circles = [new Circle(0), new Circle(1),
                  new Circle(2), new Circle(3)];
 
 const numOfColors = Circle.bcolors.length;
-const puzzle = generatePuzzle(/* numOfCircles, */numOfColors);
+const puzzle = generatePuzzle(numOfColors);
 
 const figures = [document.getElementById("circle0"),
                  document.getElementById("circle1"),
