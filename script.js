@@ -89,15 +89,12 @@ const guess = () => {
     counter.value = "Попытка " + countGuesses.toString();
     const myGuess = getCurrentColors();
     const exactMatches = checkMatches(myGuess);
-    /* const myOccurences = getColorOccurrences(myGuess);
-    const puzzleOccurences = getColorOccurrences(puzzle); */
     const unmatched = countUnmatched(myGuess);
-    answer.innerText =  myGuess.join(' ') + ' vs ' 
-                        + puzzle.join(' ') + ' exact ' 
-                        + exactMatches.toString() + ' displaced ' 
-                        + unmatched.toString(); 
-                        /* + ' ocs '  + myOccurences.join(' ') 
-                        + ' true ocs' + puzzleOccurences.join(' ') */
+    answer.innerText =  exactMatches.toString() + ' точно, ' 
+                        + unmatched.toString() + ' на других местах '; 
+    if (exactMatches == puzzle.length) {
+        alert('ПОБЕДА!');
+    }
 }
 
 const circleContainer = document.getElementById("circle-container");
