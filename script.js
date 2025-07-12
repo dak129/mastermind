@@ -1,16 +1,16 @@
 
 class Circle {
-    static bcolors = ["red", "blue", "green"];
+    static bcolors = ["red", "blue", "green", "yellow", "orange", "magenta", "aqua"];
 
-    constructor(id) {
+    constructor(id, colorsLength) {
         this.id = id;
-        this.bcolor = Circle.bcolors[Math.floor(Math.random() * Circle.bcolors.length)];
+        this.bcolor = Circle.bcolors[Math.floor(Math.random() * colorsLength)];
     }
 
-    changeBcolor() {
+    changeBcolor(colorsLength) {
         let i = Circle.bcolors.indexOf(this.bcolor);
         i++;
-        if (i === Circle.bcolors.length) {
+        if (i === colorsLength) {
             i = 0;
         } 
         this.bcolor = Circle.bcolors[i];
@@ -19,7 +19,7 @@ class Circle {
 }
 
 const drawFigures = () => {
-    for (let i = 0; i < circles.length; i++) {
+    for (let i = 0; i < numOfCircles; i++) {
         figures[i].style.backgroundColor = circles[i].bcolor;
         figures[i].style.display = "block";
     }
@@ -28,13 +28,13 @@ const drawFigures = () => {
 const changeFigure = (event) => {
     const curId = event.currentTarget.id;
     const index = parseInt(curId.slice(-1));
-    figures[index].style.backgroundColor = circles[index].changeBcolor();
+    figures[index].style.backgroundColor = circles[index].changeBcolor(numOfColors);
 }
 
-const generatePuzzle = () => {
+const generatePuzzle = (colorsLength) => {
     const arr = [];
-    for (let i = 0; i < circles.length; i++) {
-        let colorIndex = Math.floor(Math.random() * numOfColors);
+    for (let i = 0; i < numOfCircles; i++) {
+        let colorIndex = Math.floor(Math.random() * colorsLength);
         arr.push(colorIndex);
     } 
     return arr; 
@@ -42,7 +42,7 @@ const generatePuzzle = () => {
 
 const getCurrentColors = () => {
     const arr = [];
-    for (let i = 0; i < circles.length; i++) {
+    for (let i = 0; i < numOfCircles; i++) {
         arr.push(Circle.bcolors.indexOf(circles[i].bcolor));
     }
     return arr;
@@ -50,7 +50,7 @@ const getCurrentColors = () => {
 
 const checkMatches = (curGuess) => {
     countExact = 0;
-    for (let i = 0; i < circles.length; i++) { 
+    for (let i = 0; i < numOfCircles; i++) { 
         if (curGuess[i] == puzzle[i]) {
             countExact++;
         }
@@ -61,7 +61,7 @@ const checkMatches = (curGuess) => {
 const countUnmatched = (curGuess) => {
     const curUnmatched = [];
     const puzzleUnmatched = [];
-    for (let i = 0; i < circles.length; i++) { 
+    for (let i = 0; i < numOfCircles; i++) { 
         if (curGuess[i] != puzzle[i]) {
             curUnmatched.push(curGuess[i]);
             puzzleUnmatched.push(puzzle[i]);
@@ -75,14 +75,6 @@ const countUnmatched = (curGuess) => {
     }
     return count;
 } 
-
-const getColorOccurrences = (curGuess) => {
-    const colorOccurrences = new Array(numOfColors).fill(0);
-    for (let i = 0; i < circles.length; i++) {
-        colorOccurrences[curGuess[i]]++;
-    }
-    return colorOccurrences;
-}
 
 const messageOtherPlaces = (number) => {
     if (number < 2) {
@@ -98,14 +90,14 @@ const guess = () => {
     const exactMatches = checkMatches(myGuess);
     const unmatched = countUnmatched(myGuess);
     answer.innerText =  exactMatches.toString() + ' точно, ' 
-                        + unmatched.toString() + messageOtherPlaces(unmatched  ); 
+                        + unmatched.toString() + messageOtherPlaces(unmatched); 
     if (exactMatches == puzzle.length) {
         alert('ПОБЕДА!');
     }
 }
 
 const restart = () => {
-    puzzle = generatePuzzle();
+    puzzle = generatePuzzle(numOfColors);
     countGuesses = 0;
     counter.value = "0 попыток";
     answer.innerText = "Результат не определен...";
@@ -117,11 +109,12 @@ const counter = document.getElementById("counter");
 const answer = document.getElementById("answer");
 const restarter = document.getElementById("restarter");
 
-const circles = [new Circle(0), new Circle(1),
-                 new Circle(2), new Circle(3)];
+const numOfCircles = 4;
+let numOfColors = 7;
+let puzzle = generatePuzzle(numOfColors);
 
-const numOfColors = Circle.bcolors.length;
-let puzzle = generatePuzzle();
+const circles = [new Circle(0, numOfColors), new Circle(1, numOfColors),
+                 new Circle(2, numOfColors), new Circle(3, numOfColors)];
 
 const figures = [document.getElementById("circle0"),
                  document.getElementById("circle1"),
