@@ -38,7 +38,7 @@
     display: none;
 }
 
-#guesser {
+#guesser, #restarter {
     width: 12.5em /* 200px */;
     padding: 0.625em 0.625em  /* 10px 10px */;
     margin: 1.875em 0/* 30px 0 */; 
@@ -50,7 +50,7 @@
     cursor: pointer;
 }
 
-#guesser:hover {
+#guesser:hover, #restarter:hover {
     color: var(--light-bg-color);
     border: var(--light-bg-color) 2px solid;
 }

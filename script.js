@@ -98,22 +98,30 @@ const guess = () => {
     const exactMatches = checkMatches(myGuess);
     const unmatched = countUnmatched(myGuess);
     answer.innerText =  exactMatches.toString() + ' точно, ' 
-                        + unmatched.toString() + messageOtherPlaces(unmatched); 
+                        + unmatched.toString() + messageOtherPlaces(unmatched  ); 
     if (exactMatches == puzzle.length) {
         alert('ПОБЕДА!');
     }
+}
+
+const restart = () => {
+    puzzle = generatePuzzle();
+    countGuesses = 0;
+    counter.value = "0 попыток";
+    answer.innerText = "Результат не определен...";
 }
 
 const circleContainer = document.getElementById("circle-container");
 const btn = document.getElementById("guesser");
 const counter = document.getElementById("counter");
 const answer = document.getElementById("answer");
+const restarter = document.getElementById("restarter");
 
 const circles = [new Circle(0), new Circle(1),
                  new Circle(2), new Circle(3)];
 
 const numOfColors = Circle.bcolors.length;
-const puzzle = generatePuzzle();
+let puzzle = generatePuzzle();
 
 const figures = [document.getElementById("circle0"),
                  document.getElementById("circle1"),
@@ -128,3 +136,4 @@ figures[3].addEventListener("click", changeFigure);
 let countGuesses = 0;
 
 btn.addEventListener("click", guess);
+restarter.addEventListener("click", restart);
