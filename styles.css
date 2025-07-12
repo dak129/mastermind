@@ -1,6 +1,7 @@
 :root {
     --main-bg-color: #f28c28;
     --light-bg-color: #ffac1c;
+    --dark-bg-color: #a52a2a;
     --dark-color: black;
     --light-color: aliceblue;
   }
@@ -19,8 +20,13 @@
     border: none;
     color: var(--dark-color);
     font-weight: normal;
-    font-size: 1rem /* 16px */;
+    font-size: 1.25rem /* 20px */;
     text-align: center;
+    line-height: 1.5;
+}
+
+#colors {
+    font-size: 1.5rem /* 24px */;
 }
 
 #circle-container {
@@ -28,6 +34,14 @@
     flex-direction: row;  
     flex-wrap: wrap;
 }
+
+#button-container {
+    display: flex;
+    flex-direction: row;  
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
 
 .circle {
     width: 100px;
@@ -39,20 +53,34 @@
 }
 
 #guesser, #restarter {
-    width: 12.5em /* 200px */;
+    width: 9.375em /* 150px */;
     padding: 0.625em 0.625em  /* 10px 10px */;
     margin: 1.875em 0/* 30px 0 */; 
-    color: var(--main-bg-color);
-    border: var(--main-bg-color) 2px solid;
-    background-color: var(--light-color);
     font-size: 1.25rem /* 20px */;
     text-align: center;
     cursor: pointer;
 }
 
-#guesser:hover, #restarter:hover {
+#guesser {
+    color: var(--main-bg-color);
+    border: var(--main-bg-color) 2px solid;
+    background-color: var(--light-color);
+}
+
+#guesser:hover {
     color: var(--light-bg-color);
     border: var(--light-bg-color) 2px solid;
+}
+
+#restarter {
+    color: var(--dark-bg-color);
+    border: var(--dark-bg-color) 2px solid;
+    background-color: var(--light-color);
+}
+
+#restarter:hover {
+    color: var(--dark-color);
+    border: var(--dark-color) 2px solid;
 }
 
 #counter {
@@ -69,7 +97,7 @@
 
 #answer {
     width: 18.5em /* 300px */;
-    padding: 0.9375em 0.9375em /* 15px 15px */;
+    padding: 0.625em 0.625em  /* 10px 10px */;
     border: none;
     color: var(--dark-color);
     font-weight: bolder;

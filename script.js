@@ -83,6 +83,16 @@ const messageOtherPlaces = (number) => {
     return " на других местах";
 }
 
+const restart = () => {
+    puzzle = generatePuzzle(numOfColors);
+    for (let i = 0; i < numOfCircles; i++) {
+        circles[i] = new Circle(i, numOfColors);
+    }
+    countGuesses = 0;
+    counter.value = "0 попыток";
+    answer.innerText = "Результат не определен...";
+}
+
 const guess = () => {
     countGuesses++;
     counter.value = "Попытка " + countGuesses.toString();
@@ -93,14 +103,13 @@ const guess = () => {
                         + unmatched.toString() + messageOtherPlaces(unmatched); 
     if (exactMatches == puzzle.length) {
         alert('ПОБЕДА!');
+        restart();
     }
 }
 
-const restart = () => {
-    puzzle = generatePuzzle(numOfColors);
-    countGuesses = 0;
-    counter.value = "0 попыток";
-    answer.innerText = "Результат не определен...";
+const changeColorSet = (event) => {
+    numOfColors = parseInt(event.currentTarget.value);
+    restart();
 }
 
 const circleContainer = document.getElementById("circle-container");
@@ -108,9 +117,10 @@ const btn = document.getElementById("guesser");
 const counter = document.getElementById("counter");
 const answer = document.getElementById("answer");
 const restarter = document.getElementById("restarter");
+const colors = document.getElementById("colors");
 
 const numOfCircles = 4;
-let numOfColors = 7;
+let numOfColors = 3;
 let puzzle = generatePuzzle(numOfColors);
 
 const circles = [new Circle(0, numOfColors), new Circle(1, numOfColors),
@@ -130,3 +140,4 @@ let countGuesses = 0;
 
 btn.addEventListener("click", guess);
 restarter.addEventListener("click", restart);
+colors.addEventListener("change", changeColorSet);

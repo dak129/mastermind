@@ -9,17 +9,23 @@
 </head>
 <body>
 <div id="main">
-    <p id="informer">Угадайте цвета кругов (они могут повторяться)</p>
+    <p id="informer">
+        <span>Угадайте цвета кругов (они могут повторяться).</span>
+        <label for="colors">Всего цветов: </label>
+        <input type="number" step="1" min="3" max="7" value="3" id="colors" name="colors"/>
+    </p>
     <div id="circle-container">
         <div class="circle" id="circle0"></div>
         <div class="circle" id="circle1"></div>
         <div class="circle" id="circle2"></div>
         <div class="circle" id="circle3"></div>
     </div>
-    <button id="guesser">УГАДАТЬ</button>
+    <div id="button-container">
+        <button id="guesser">УГАДАТЬ</button>
+        <button id="restarter">СБРОСИТЬ</button>
+    </div>
     <input type="text" id="counter" placeholder="0 попыток" readonly/>
     <p id="answer">Результат не определен...</p>
-    <button id="restarter">СБРОСИТЬ</button>
 </div>
 <script src="script.js"></script>
 </body>
