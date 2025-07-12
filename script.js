@@ -84,6 +84,13 @@ const getColorOccurrences = (curGuess) => {
     return colorOccurrences;
 }
 
+const messageOtherPlaces = (number) => {
+    if (number < 2) {
+        return " на другом месте";
+    }
+    return " на других местах";
+}
+
 const guess = () => {
     countGuesses++;
     counter.value = "Попытка " + countGuesses.toString();
@@ -91,7 +98,7 @@ const guess = () => {
     const exactMatches = checkMatches(myGuess);
     const unmatched = countUnmatched(myGuess);
     answer.innerText =  exactMatches.toString() + ' точно, ' 
-                        + unmatched.toString() + ' на других местах '; 
+                        + unmatched.toString() + messageOtherPlaces(unmatched); 
     if (exactMatches == puzzle.length) {
         alert('ПОБЕДА!');
     }
