@@ -18,6 +18,7 @@ class Circle {
     }
 }
 
+
 const drawFigures = () => {
     for (let i = 0; i < numOfCircles; i++) {
         figures[i].style.backgroundColor = circles[i].bcolor;
@@ -25,11 +26,13 @@ const drawFigures = () => {
     }
 };
 
+
 const changeFigure = (event) => {
     const curId = event.currentTarget.id;
     const index = parseInt(curId.slice(-1));
     figures[index].style.backgroundColor = circles[index].changeBcolor(numOfColors);
 }
+
 
 const generatePuzzle = (colorsLength) => {
     const arr = [];
@@ -40,6 +43,7 @@ const generatePuzzle = (colorsLength) => {
     return arr; 
 };
 
+
 const getCurrentColors = () => {
     const arr = [];
     for (let i = 0; i < numOfCircles; i++) {
@@ -47,6 +51,7 @@ const getCurrentColors = () => {
     }
     return arr;
 }
+
 
 const checkMatches = (curGuess) => {
     countExact = 0;
@@ -57,6 +62,7 @@ const checkMatches = (curGuess) => {
     }
     return countExact;
 } 
+
 
 const countUnmatched = (curGuess) => {
     const curUnmatched = [];
@@ -76,12 +82,14 @@ const countUnmatched = (curGuess) => {
     return count;
 } 
 
+
 const messageOtherPlaces = (number) => {
     if (number < 2) {
         return " на другом месте";
     }
     return " на других местах";
 }
+
 
 const restart = () => {
     puzzle = generatePuzzle(numOfColors);
@@ -92,6 +100,7 @@ const restart = () => {
     counter.value = "0 попыток";
     answer.innerText = "Результат не определен...";
 }
+
 
 const guess = () => {
     countGuesses++;
@@ -107,10 +116,13 @@ const guess = () => {
     }
 }
 
+
 const changeColorSet = (event) => {
     numOfColors = parseInt(event.currentTarget.value);
     restart();
+    drawFigures();
 }
+
 
 const circleContainer = document.getElementById("circle-container");
 const btn = document.getElementById("guesser");
