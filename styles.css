@@ -95,7 +95,7 @@
 }
 
 #answer {
-    width: 12.5em /* 200px */;
+    width: 80%;
     padding: 0.625em 0.625em  /* 10px 10px */;
     border: none;
     color: var(--dark-color);
