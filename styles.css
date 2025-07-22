@@ -26,11 +26,9 @@
 }
 
 #circle-container {
-    display: flex;
-    flex-direction: row;  
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
 }
 
 .circle {
@@ -114,9 +112,22 @@
 }
 
 #colors-group {
-    display: flex; align-items: center;;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 #colors {
     font-size: 1.5rem /* 24px */;
+    width: 3rem;
+}
+
+@media (max-width: 600px) {
+    #informer {
+        margin: 0;
+    }
+
+    #circle-container {
+        grid-template-columns: auto auto; /* 2 columns */
+    }
 }
