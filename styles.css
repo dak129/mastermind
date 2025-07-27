@@ -4,7 +4,7 @@
     --dark-bg-color: #a52a2a;
     --dark-color: black;
     --light-color: aliceblue;
-  }
+}
 
 #main {
     width: 100%;
@@ -42,8 +42,8 @@
 
 #guesser {
     width: 9.375em /* 150px */;
-    padding: 0.625em 0.625em  /* 10px 10px */;
-    margin: 1.875em 0/* 30px 0 */; 
+    padding: 0.625em 0.625em /* 10px 10px */;
+    margin: 1.875em 0 /* 30px 0 */;
     font-size: 1.25rem /* 20px */;
     text-align: center;
     cursor: pointer;
@@ -62,8 +62,8 @@
 
 #restarter {
     width: 9.375em /* 150px */;
-    padding: 0.625em 0.625em  /* 10px 10px */;
-    margin: 0 0/* 0 0 */; 
+    padding: 0.625em 0.625em /* 10px 10px */;
+    margin: 0 0 /* 0 0 */;
     font-size: 1.25rem /* 20px */;
     text-align: center;
     cursor: pointer;
@@ -86,7 +86,7 @@
     background-color: var(--main-bg-color);
     color: var(--dark-color);
     border: var(--dark-color) 2px solid;
-    border-radius:  1.25em /* 20px */;
+    border-radius: 1.25em /* 20px */;
     font-weight: bolder;
     font-size: 1.25rem /* 20px */;
     text-align: center;
@@ -94,7 +94,7 @@
 
 #answer {
     width: 80%;
-    padding: 0.625em 0.625em  /* 10px 10px */;
+    padding: 0.625em 0.625em /* 10px 10px */;
     border: none;
     color: var(--dark-color);
     font-weight: bolder;
@@ -104,7 +104,7 @@
 
 #button-container {
     display: flex;
-    flex-direction: row;  
+    flex-direction: row;
     flex-wrap: wrap;
     align-content: center;
     justify-self: center;

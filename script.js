@@ -1,4 +1,3 @@
-
 class Circle {
     static bcolors = ["red", "blue", "green", "yellow", "orange", "magenta", "aqua"];
 
@@ -12,12 +11,11 @@ class Circle {
         i++;
         if (i === colorsLength) {
             i = 0;
-        } 
+        }
         this.bcolor = Circle.bcolors[i];
         return this.bcolor;
     }
 }
-
 
 const drawFigures = () => {
     for (let i = 0; i < numOfCircles; i++) {
@@ -26,23 +24,20 @@ const drawFigures = () => {
     }
 };
 
-
 const changeFigure = (event) => {
     const curId = event.currentTarget.id;
     const index = parseInt(curId.slice(-1));
     figures[index].style.backgroundColor = circles[index].changeBcolor(numOfColors);
-}
-
+};
 
 const generatePuzzle = (colorsLength) => {
     const arr = [];
     for (let i = 0; i < numOfCircles; i++) {
         let colorIndex = Math.floor(Math.random() * colorsLength);
         arr.push(colorIndex);
-    } 
-    return arr; 
+    }
+    return arr;
 };
-
 
 const getCurrentColors = () => {
     const arr = [];
@@ -50,24 +45,22 @@ const getCurrentColors = () => {
         arr.push(Circle.bcolors.indexOf(circles[i].bcolor));
     }
     return arr;
-}
-
+};
 
 const checkMatches = (curGuess) => {
     countExact = 0;
-    for (let i = 0; i < numOfCircles; i++) { 
+    for (let i = 0; i < numOfCircles; i++) {
         if (curGuess[i] == puzzle[i]) {
             countExact++;
         }
     }
     return countExact;
-} 
-
+};
 
 const countUnmatched = (curGuess) => {
     const curUnmatched = [];
     const puzzleUnmatched = [];
-    for (let i = 0; i < numOfCircles; i++) { 
+    for (let i = 0; i < numOfCircles; i++) {
         if (curGuess[i] != puzzle[i]) {
             curUnmatched.push(curGuess[i]);
             puzzleUnmatched.push(puzzle[i]);
@@ -80,16 +73,14 @@ const countUnmatched = (curGuess) => {
         }
     }
     return count;
-} 
-
+};
 
 const messageOtherPlaces = (number) => {
     if (number < 2) {
         return " на другом месте";
     }
     return " на других местах";
-}
-
+};
 
 const restart = () => {
     puzzle = generatePuzzle(numOfColors);
@@ -99,8 +90,7 @@ const restart = () => {
     countGuesses = 0;
     counter.value = "0 попыток";
     answer.innerText = "Результат не определен...";
-}
-
+};
 
 const guess = () => {
     countGuesses++;
@@ -108,21 +98,18 @@ const guess = () => {
     const myGuess = getCurrentColors();
     const exactMatches = checkMatches(myGuess);
     const unmatched = countUnmatched(myGuess);
-    answer.innerText =  exactMatches.toString() + ' точно, ' 
-                        + unmatched.toString() + messageOtherPlaces(unmatched); 
+    answer.innerText = exactMatches.toString() + " точно, " + unmatched.toString() + messageOtherPlaces(unmatched);
     if (exactMatches == puzzle.length) {
-        alert('ПОБЕДА!');
+        alert("ПОБЕДА!");
         restart();
     }
-}
-
+};
 
 const changeColorSet = (event) => {
     numOfColors = parseInt(event.currentTarget.value);
     restart();
     drawFigures();
-}
-
+};
 
 const circleContainer = document.getElementById("circle-container");
 const btn = document.getElementById("guesser");
@@ -135,13 +122,19 @@ const numOfCircles = 4;
 let numOfColors = 3;
 let puzzle = generatePuzzle(numOfColors);
 
-const circles = [new Circle(0, numOfColors), new Circle(1, numOfColors),
-                 new Circle(2, numOfColors), new Circle(3, numOfColors)];
+const circles = [
+    new Circle(0, numOfColors),
+    new Circle(1, numOfColors),
+    new Circle(2, numOfColors),
+    new Circle(3, numOfColors),
+];
 
-const figures = [document.getElementById("circle0"),
-                 document.getElementById("circle1"),
-                 document.getElementById("circle2"),
-                 document.getElementById("circle3")];
+const figures = [
+    document.getElementById("circle0"),
+    document.getElementById("circle1"),
+    document.getElementById("circle2"),
+    document.getElementById("circle3"),
+];
 drawFigures();
 figures[0].addEventListener("click", changeFigure);
 figures[1].addEventListener("click", changeFigure);
